@@ -25,7 +25,6 @@ app.get('/', function(req, res) {
 
 // Your first API endpoint
 app.post('/api/shorturl', function(req, res) {
-  console.log(req.body)
   const url = req.body.url;
   const dnslookup = dns.lookup(urlparser.parse(url).hostname, async(err, address) => {
     if(!address) {
@@ -37,7 +36,6 @@ app.post('/api/shorturl', function(req, res) {
         short_url: urlCount
       }
       const result = await urls.insertOne(urlDoc)
-      console.log(result);
       res.json({ original_url: url, short_url: urlCount })
     }
   })
